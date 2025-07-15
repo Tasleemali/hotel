@@ -7,7 +7,7 @@ function Footer() {
          <div className=' max-w-screen-2xl mx-auto px-4 md:px-6 py-5'>
             <div className='grid grid-cols-1 sm:grid-cols-2 place-items-start gap-4  md:grid-cols-4  md:place-items-center'>
                  <section>
-                    <h2 className='font-bold text-2xl md:text-3xl'>RaghavJiSarkar</h2>
+                    <h2 className='font-bold text-2xl md:text-3xl'>HotelBoom</h2>
                     <p className='text-[#fefae0]'>Experiance Divinity & comfort in Ayodhya</p>
                  </section>
                  <section>

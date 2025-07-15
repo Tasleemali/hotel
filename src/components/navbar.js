@@ -5,6 +5,9 @@ import { Menu, User ,X } from 'lucide-react'
 import Link from 'next/link'
 import { GlobaleContext } from '@/context'
 import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
+
+
 
 
 const Navbar = () => {
@@ -12,13 +15,14 @@ const Navbar = () => {
   const {isAuth} = useContext(GlobaleContext)
     const [toggaleMenu ,setToggaleMenu] = useState(false)
     const [activebar , setActivebar] = useState('home')
+    const {data:session} = useSession()
   return (
     <div className='bg-[#6b0f1a] sticky top-0 z-20 text-[#fefae0] '>
          <div className='max-w-screen-2xl mx-auto  '>
             <div className='flex justify-between items-center px-4 md:px-6 py-5'>
 
                <div>
-              <Link href={"/"}> <h1 className='font-bold text-2xl md:text-3xl'>RaghavJiSarkar</h1></Link> 
+              <Link href={"/"}> <h1 className='font-bold text-2xl md:text-3xl'>HotelBoom</h1></Link> 
                </div>
                
                
@@ -40,8 +44,12 @@ const Navbar = () => {
                 <Link href={"/main-page/all-rooms"}><li  onClick={()=> {setActivebar('room') ,setToggaleMenu(false)}} value={"room"}  className={`${activebar === "room"? "border-b-2 border-[#fefae0] ": ""}`}>Room</li></Link>    
                 <Link href={"/main-page/all-gallery"}><li  onClick={()=> {setActivebar('gallery') ,setToggaleMenu(false)}} value={"gallery"}  className={`${activebar === "gallery"? "border-b-2 border-[#fefae0] ": ""}`}>Gallery</li></Link> 
                 <Link href={"/main-page/about"}><li  onClick={()=> {setActivebar('about') ,setToggaleMenu(false)}} value={"about"}  className={`${activebar === "about"? "border-b-2 border-[#fefae0] ": ""}`}>About Us</li></Link>   
-                    <Link href={"/main-page/contact-us"}><li onClick={()=> {setActivebar('contact') ,setToggaleMenu(false)}} value={"conatct"}  className={`${activebar === "conatct"? "border-b-2 border-[#fefae0] ": ""}`}>Contact Us</li></Link> 
-                   
+                <Link href={"/main-page/contact-us"}><li onClick={()=> {setActivebar('contact') ,setToggaleMenu(false)}} value={"conatct"}  className={`${activebar === "conatct"? "border-b-2 border-[#fefae0] ": ""}`}>Contact Us</li></Link> 
+      
+                {session?.user && (
+          <Link href={"/main-page/booking"}><li onClick={()=> {setActivebar('booking') ,setToggaleMenu(false)}} value={"booking"}  className={`${activebar === "booking"? "border-b-2 border-[#fefae0] ": ""}`}>Bookings</li></Link> 
+      
+        )}
                 </ul>
                </div>
               

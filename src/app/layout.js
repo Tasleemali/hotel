@@ -25,7 +25,9 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
        
-          
+          {/* <head>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+       </head> */}
        
         <CommonLayOut>
         {children}

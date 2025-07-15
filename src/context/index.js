@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react';
 export const GlobaleContext = createContext(null);
 
 export default function GlobalState({ children }) {
+  const [rooms, setRooms] = useState([]);
   const { data: session, status } = useSession();  // Using NextAuth's useSession hook to track session state
   const [isAuth, setIsAuth] = useState(false);
 
@@ -19,7 +20,7 @@ export default function GlobalState({ children }) {
   }, [status]);  // This will re-run whenever session status changes
 
   return (
-    <GlobaleContext.Provider value={{ isAuth, setIsAuth }}>
+    <GlobaleContext.Provider value={{ isAuth, setIsAuth ,rooms, setRooms }}>
       {children}
     </GlobaleContext.Provider>
   );

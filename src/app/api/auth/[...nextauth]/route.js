@@ -7,7 +7,7 @@ import bcrypt from "bcryptjs";
 import { hotelDB } from "@/database/hotelDB";
 import User from "@/models/User";
 
-export const authOption = {
+export const authOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -68,5 +68,5 @@ export const authOption = {
   secret: process.env.NEXTAUTH_SECRET,
 };
 
-const handler = NextAuth(authOption);
+const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };

@@ -8,7 +8,7 @@ import Rooms from "@/components/compo-ui/rooms";
 
 export default function Home() {
   return (
-    <div className="max-w-screen-2xl text-black">
+    <div className="max-w-screen-2xl text-black ">
         <Hero/>
         <Rooms/>
         <Facilities/>

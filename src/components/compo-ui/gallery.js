@@ -11,7 +11,7 @@ import Link from 'next/link'
  ]
 const Gallery = () => {
   return (
-    <div className='bg-[#fefae0]  text-[#6b0f1a] '>
+    <div className='bg-white  text-[#6b0f1a] '>
       <div className='max-w-screen-2xl mx-auto px-4 md:px-6 py-5'>
         <h1 className='text-2xl md:text-3xl font-semibold  text-center mb-5'>Gallery</h1>
       <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4'>

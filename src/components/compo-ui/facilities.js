@@ -12,7 +12,7 @@ const facilites = [
 ]
 const Facilities= () => {
   return (
-    <div className='bg-[#fefae0]  text-[#6b0f1a]'>
+    <div className='bg-white  text-[#6b0f1a]'>
       <div className='max-w-5xl mx-auto py-5 '>
         <h1 className='text-2xl md:text-3xl font-semibold  text-center mb-5'>Our Facilities</h1>
         <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 text-center gap-8'>

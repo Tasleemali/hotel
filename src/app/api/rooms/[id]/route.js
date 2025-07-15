@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(req, { params }) {
   await hotelDB();
-   const {id} = params
+   const {id} = await params
   const room = await Room.findById(id);
   if (!room) {
     return NextResponse.json({ error: "Room not found" }, { status: 404 });

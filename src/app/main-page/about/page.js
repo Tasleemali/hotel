@@ -1,13 +1,67 @@
 'use client'
-import Contact from '@/components/compo-ui/contact';
-import React from 'react';
+import React, { useEffect, useState } from 'react'
+import Contact from '@/components/compo-ui/contact'
 
 const About = () => {
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 2000) // Simulated delay
+    return () => clearTimeout(timer)
+  }, [])
+
+  if (loading) {
+    return (
+      <div className="bg-[#fefae0] text-[#6b0f1a] py-16 animate-pulse">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 space-y-12">
+          {/* Heading */}
+          <div className="text-center space-y-4">
+            <div className="h-10 bg-gray-300 w-1/2 mx-auto rounded-md"></div>
+            <div className="h-5 bg-gray-200 w-1/3 mx-auto rounded-md"></div>
+          </div>
+
+          {/* Image + About Section */}
+          <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-14">
+            <div className="h-80 md:h-[500px] bg-gray-300 w-full rounded-2xl"></div>
+            <div className="space-y-6">
+              <div className="h-7 bg-gray-300 w-1/3 rounded-md"></div>
+              <div className="space-y-2">
+                <div className="h-4 bg-gray-200 w-full rounded-md"></div>
+                <div className="h-4 bg-gray-200 w-3/4 rounded-md"></div>
+              </div>
+              <div className="h-6 bg-gray-300 w-1/4 rounded-md mt-4"></div>
+              <div className="space-y-2">
+                <div className="h-4 bg-gray-200 w-full rounded-md"></div>
+                <div className="h-4 bg-gray-200 w-2/3 rounded-md"></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Other Sections */}
+          {[...Array(5)].map((_, i) => (
+            <div key={i} className="space-y-4">
+              <div className="h-6 bg-gray-300 w-1/3 rounded-md"></div>
+              <div className="space-y-2">
+                <div className="h-4 bg-gray-200 w-full rounded-md"></div>
+                <div className="h-4 bg-gray-200 w-5/6 rounded-md"></div>
+                <div className="h-4 bg-gray-200 w-3/4 rounded-md"></div>
+              </div>
+            </div>
+          ))}
+
+          {/* Contact Section Placeholder */}
+          <div className="mt-24 space-y-4">
+            <div className="h-6 bg-gray-300 w-1/3 rounded-md mx-auto"></div>
+            <div className="h-40 bg-gray-200 w-full rounded-lg"></div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="bg-[#fefae0] text-[#6b0f1a] py-16">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
-        
-        {/* Heading */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold leading-tight">Welcome to Hotel RaghjiSarkar</h1>
           <p className="mt-4 text-lg md:text-xl max-w-2xl mx-auto">
@@ -15,9 +69,7 @@ const About = () => {
           </p>
         </div>
 
-        {/* Image + About Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-14 mb-24">
-          {/* Image */}
           <div className="overflow-hidden rounded-2xl shadow-xl">
             <img
               src="https://cdn-ijnhp.nitrocdn.com/pywIAllcUPgoWDXtkiXtBgvTOSromKIg/assets/images/optimized/rev-5794eaa/www.jaypeehotels.com/blog/wp-content/uploads/2024/09/Blog-6-scaled.jpg"
@@ -26,7 +78,6 @@ const About = () => {
             />
           </div>
 
-          {/* About Text */}
           <div className="space-y-8">
             <div>
               <h2 className="text-2xl nd:text-3xl font-semibold mb-3">About Us</h2>
@@ -44,10 +95,7 @@ const About = () => {
           </div>
         </div>
 
-        {/* Other Sections */}
         <div className="space-y-16">
-
-          {/* Heritage */}
           <div className="space-y-6">
             <h3 className="text-2xl nd:text-3xl font-semibold">A Rich Heritage</h3>
             <p className="text-lg leading-relaxed">
@@ -55,7 +103,6 @@ const About = () => {
             </p>
           </div>
 
-          {/* Comfort */}
           <div className="space-y-6">
             <h3 className="text-2xl nd:text-3xl font-semibold">Comfort and Luxury</h3>
             <p className="text-lg leading-relaxed">
@@ -63,7 +110,6 @@ const About = () => {
             </p>
           </div>
 
-          {/* Dining */}
           <div className="space-y-6">
             <h3 className="text-2xl nd:text-3xl font-semibold">Dining Experience</h3>
             <p className="text-lg leading-relaxed">
@@ -71,7 +117,6 @@ const About = () => {
             </p>
           </div>
 
-          {/* Services */}
           <div className="space-y-6">
             <h3 className="text-2xl nd:text-3xl font-semibold">Our Services</h3>
             <ul className="list-disc pl-6 text-lg space-y-2">
@@ -82,7 +127,6 @@ const About = () => {
             </ul>
           </div>
 
-          {/* Experience */}
           <div className="space-y-6">
             <h3 className="text-2xl nd:text-3xl font-semibold">The RaghjiSarkar Experience</h3>
             <p className="text-lg leading-relaxed">
@@ -90,7 +134,6 @@ const About = () => {
             </p>
           </div>
 
-          {/* Why Choose */}
           <div className="space-y-6">
             <h3 className=" text-2xl nd:text-3xl font-semibold">Why Choose Us?</h3>
             <ul className="list-disc pl-6 text-lg space-y-2">
@@ -101,17 +144,14 @@ const About = () => {
               <li>Affordable luxury with premium offerings</li>
             </ul>
           </div>
-
         </div>
 
-        {/* Contact Section */}
         <div className="mt-24">
           <Contact />
         </div>
-
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default About;
+export default About

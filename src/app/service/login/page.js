@@ -31,6 +31,7 @@ export default function SignInPage() {
       alert("login successful")
     } else {
       setError("Invalid credentials");
+      setLoading(false)
     }
   };
 

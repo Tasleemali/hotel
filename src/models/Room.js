@@ -1,13 +1,15 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
-const RoomSchema = new mongoose.Schema({
-  name: String,
-  price: Number,
-  description: String,
-  image: String,
-  quantity: { type: Number, default: 0 },  // Total rooms available
-});
+const RoomSchema = new mongoose.Schema(
+  {
+    image:String,
+    name:String,
+    description:String,
+    price:Number,
+    totalRooms :Number
+    
+  }
+);
 
-
-
-export default mongoose.models.allrooms || mongoose.model('allrooms', RoomSchema)
+const Room = mongoose.models.Room || mongoose.model("Room", RoomSchema);
+export default Room;
