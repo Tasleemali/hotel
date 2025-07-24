@@ -9,36 +9,33 @@ export default function AllRooms() {
   const router = useRouter();
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     const fetchRoom = async () => {
       try {
         const res = await fetch("/api/rooms");
         const data = await res.json();
         setRooms(data);
-        localStorage.setItem("rooms", JSON.stringify(data)); // cache it
+        localStorage.setItem("rooms", JSON.stringify(data));
       } catch (err) {
         console.error("Failed to fetch rooms", err);
       } finally {
         setLoading(false);
       }
-    }
+    };
     fetchRoom();
-
   }, []);
 
-
-  // if(loading)return <h1 className="h-screen bg-[#fefae0] text-black grid place-items-center">Loading</h1>
   if (loading) {
     return (
-      <div className="bg-[#fefae0] text-[#6b0f1a] min-h-screen px-4 md:px-6 py-5">
+      <div className="bg-[#fefae0] text-[#6b0f1a] min-h-screen px-4 py-5">
         <div className="animate-pulse space-y-3">
           <div className="text-center mb-6">
             <div className="h-8 w-32 mx-auto bg-gray-300 rounded"></div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-10">
             {[...Array(8)].map((_, idx) => (
-              <div key={idx} className="animate-pulse space-y-3">
-                <div className="bg-gray-300 h-52 w-full rounded-sm"></div>
+              <div key={idx} className="space-y-3">
+                <div className="bg-gray-300 h-52 w-full rounded-md"></div>
                 <div className="h-5 bg-gray-300 rounded w-3/4"></div>
                 <div className="h-4 bg-gray-200 rounded w-full"></div>
                 <div className="h-4 bg-gray-200 rounded w-1/2"></div>
@@ -57,28 +54,24 @@ export default function AllRooms() {
         <h1 className="text-2xl md:text-3xl font-semibold text-center mb-5">
           Our Rooms
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-10">
-          {rooms.map((room, idx) => (
-            <div key={idx}>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          {rooms.map((room) => (
+            <div
+              key={room._id}
+              onClick={() => router.push(`/main-page/all-rooms/${room._id}`)}
+              className="cursor-pointer bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition"
+            >
               <img
-                src={room.image}
-                alt={`Image of room: ${room.name}`}
-                className="w-full h-52 object-cover rounded-sm"
+                src={room.image || "/placeholder.jpg"}
+                alt={room.name}
+                className="w-full h-48 object-cover"
               />
-              <div>
-                <h1 className="font-semibold text-lg">{room.name}</h1>
-                <p>{room.description}</p>
-                <p>₹{room.price}</p>
-                <p>{room.totalRooms} Rooms </p>
-                <button
-                  onClick={() => router.push(`/main-page/all-rooms/${room._id}`)}
-                  className="mt-2 px-3 py-1 border-2 border-[#6b0f1a] rounded-md 
-             hover:text-[#fefae0] hover:bg-[#6b0f1a]
-             focus:bg-[#6b0f1a] focus:text-[#fefae0]
-             active:bg-[#6b0f1a] active:text-[#fefae0] transition"
-                >
-                  Book now
-                </button>
+              <div className="p-4">
+                <h2 className="text-lg font-bold mb-1">{room.name}</h2>
+                <p className="text-sm text-gray-700 line-clamp-2">{room.description}</p>
+                <p className="mt-2 text-[#6b0f1a] font-semibold">₹{room.price} / night</p>
+                <p className="text-xs text-gray-500">{room.totalRooms} Rooms Available</p>
               </div>
             </div>
           ))}

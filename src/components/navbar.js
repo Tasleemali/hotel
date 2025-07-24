@@ -1,74 +1,121 @@
-"use client"
+"use client";
 
-import React, { useContext, useState } from 'react'
-import { Menu, User ,X } from 'lucide-react'
-import Link from 'next/link'
-import { GlobaleContext } from '@/context'
-import { useRouter } from 'next/navigation'
-import { useSession } from 'next-auth/react'
-
-
-
+import React, { useContext, useState } from "react";
+import { AlignRight, Menu, User, X } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { GlobaleContext } from "@/context";
+import { useSession } from "next-auth/react";
 
 const Navbar = () => {
-  const router = useRouter()
-  const {isAuth} = useContext(GlobaleContext)
-    const [toggaleMenu ,setToggaleMenu] = useState(false)
-    const [activebar , setActivebar] = useState('home')
-    const {data:session} = useSession()
+  const router = useRouter();
+  const { isAuth } = useContext(GlobaleContext);
+  const { data: session } = useSession();
+
+  const [toggleMenu, setToggleMenu] = useState(false);
+  const [activeBar, setActiveBar] = useState("home");
+
+  const navLinks = [
+    { name: "Home", href: "/" },
+    { name: "Room", href: "/main-page/all-rooms" },
+    { name: "Gallery", href: "/main-page/all-gallery" },
+    { name: "About Us", href: "/main-page/about" },
+    { name: "Contact Us", href: "/main-page/contact-us" },
+  ];
+
+  if (session?.user) {
+    navLinks.push({ name: "Bookings", href: "/main-page/booking" });
+  }
+
   return (
-    <div className='bg-[#6b0f1a] sticky top-0 z-20 text-[#fefae0] '>
-         <div className='max-w-screen-2xl mx-auto  '>
-            <div className='flex justify-between items-center px-4 md:px-6 py-5'>
+    <nav className="bg-[#6b0f1a] text-[#fefae0] sticky top-0 z-50">
+      <div className="max-w-screen-2xl mx-auto px-4 md:px-6 py-5 flex justify-between items-center">
+        {/* Logo */}
+        <Link href="/">
+          <h1
+            onClick={() => setActiveBar("home")}
+            className="font-bold text-2xl md:text-3xl cursor-pointer"
+          >
+            HotelBoom
+          </h1>
+        </Link>
 
-               <div>
-              <Link href={"/"}> <h1 className='font-bold text-2xl md:text-3xl'>HotelBoom</h1></Link> 
-               </div>
-               
-               
-               {/* desktop navbar */}
-               <div className='hidden md:block '>
-               <ul className='  flex justify-center items-center space-x-12 font-semibold'>
-               <Link href={"/"}><li value={"home"} onClick={()=>setActivebar('home')} className={`${activebar === "home"? "border-b-2 border-[#fefae0] ": ""}`}>Home</li></Link> 
-              <Link href={"/main-page/all-rooms"}><li value={"room"} onClick={()=>setActivebar('room')} className={`${activebar === "room"? "border-b-2 border-[#fefae0] ": ""}`}>Room</li></Link> 
-              <Link href={"/main-page/all-gallery"}><li value={"gallery"} onClick={()=>setActivebar('gallery')} className={`${activebar === "gallery"? "border-b-2 border-[#fefae0] ": ""}`}>Gallery</li></Link>       
-              <Link href={"/main-page/about"}><li value={"about"} onClick={()=>setActivebar('about')} className={`${activebar === "about"? "border-b-2 border-[#fefae0] ": ""}`}>About Us</li></Link>     
-                    <Link href={"/main-page/contact-us"}><li value={"contact"} onClick={()=>setActivebar('contact')} className={`${activebar === "contact"? "border-b-2 border-[#fefae0] ": ""}`}>Contact Us</li></Link>      
-                </ul>
-               </div>
-                {/* mobile navbar */}
-               <div className={ ` px-5 pt-5 md:hidden z-10   bg-[#6b0f1a] w-full h-full fixed top-0 right-0 transform ${toggaleMenu ?"translate-x-0" : "translate-x-full" } transition transform duration-3s ease-in-out`}>
-                <span onClick={()=> setToggaleMenu(false)} className=''><X/></span>
-               <ul className=' pt-5 grid grid-cols-1 place-items-center space-y-10 '>
-               <Link href={"/"}><li onClick={()=> {setActivebar('home') ,setToggaleMenu(false)}} value={"home"}  className={`${activebar === "home"? "border-b-2 border-[#fefae0] ": ""}`}>Home</li></Link> 
-                <Link href={"/main-page/all-rooms"}><li  onClick={()=> {setActivebar('room') ,setToggaleMenu(false)}} value={"room"}  className={`${activebar === "room"? "border-b-2 border-[#fefae0] ": ""}`}>Room</li></Link>    
-                <Link href={"/main-page/all-gallery"}><li  onClick={()=> {setActivebar('gallery') ,setToggaleMenu(false)}} value={"gallery"}  className={`${activebar === "gallery"? "border-b-2 border-[#fefae0] ": ""}`}>Gallery</li></Link> 
-                <Link href={"/main-page/about"}><li  onClick={()=> {setActivebar('about') ,setToggaleMenu(false)}} value={"about"}  className={`${activebar === "about"? "border-b-2 border-[#fefae0] ": ""}`}>About Us</li></Link>   
-                <Link href={"/main-page/contact-us"}><li onClick={()=> {setActivebar('contact') ,setToggaleMenu(false)}} value={"conatct"}  className={`${activebar === "conatct"? "border-b-2 border-[#fefae0] ": ""}`}>Contact Us</li></Link> 
-      
-                {session?.user && (
-          <Link href={"/main-page/booking"}><li onClick={()=> {setActivebar('booking') ,setToggaleMenu(false)}} value={"booking"}  className={`${activebar === "booking"? "border-b-2 border-[#fefae0] ": ""}`}>Bookings</li></Link> 
-      
-        )}
-                </ul>
-               </div>
-              
-              
-               
-               <div className='flex gap-5 items-center'>
-               {isAuth ?  <User onClick={()=>{ router.push("/service/account")}} className=' w-8 h-8'/> :  <button onClick={()=>{ router.push("/service/login") }} className='text-[#fefae0] font-semibold px-4 py-1 border-2 border-[#fefae0] rounded-lg '>Login</button>}
-              <Menu onClick={()=>{ setToggaleMenu(true)}} className='md:hidden w-8 h-8'/>
-              
-               </div>
-               
-            
-             
-            
-            </div>
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex items-center space-x-10 font-medium">
+          {navLinks.map((link) => (
+            <li key={link.name}>
+              <Link
+                href={link.href}
+                className={`hover:text-yellow-200 transition ${
+                  activeBar === link.name.toLowerCase()
+                    ? "border-b-2 border-[#fefae0]"
+                    : ""
+                }`}
+                onClick={() => setActiveBar(link.name.toLowerCase())}
+              >
+                {link.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
 
-         </div>
-    </div>
-  )
-}
+        {/* User/Login + Menu Button */}
+        <div className="flex items-center gap-4">
+          {isAuth ? (
+            <User
+              className="w-7 h-7 cursor-pointer"
+              onClick={() => router.push("/service/account")}
+            />
+          ) : (
+            <button
+              onClick={() => router.push("/service/login")}
+              className="border border-[#fefae0] px-4 py-1 rounded-lg font-semibold hover:bg-[#8d1222] transition"
+            >
+              Login
+            </button>
+          )}
+          <AlignRight
+            className="md:hidden w-7 h-7 cursor-pointer"
+            onClick={() => setToggleMenu(true)}
+          />
+        </div>
 
-export default Navbar
+        {/* Mobile Menu */}
+        <div
+          className={`fixed top-0 right-0 w-full h-full bg-[#6b0f1a] px-6 py-8 transition-transform z-40 md:hidden ${
+            toggleMenu ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <div className="flex justify-end">
+            <X
+              onClick={() => setToggleMenu(false)}
+              className="w-7 h-7 cursor-pointer"
+            />
+          </div>
+          <ul className="mt-8 flex flex-col items-center space-y-8 text-lg font-medium">
+            {navLinks.map((link) => (
+              <li key={link.name}>
+                <Link
+                  href={link.href}
+                  className={`${
+                    activeBar === link.name.toLowerCase()
+                      ? "border-b-2 border-[#fefae0]"
+                      : ""
+                  }`}
+                  onClick={() => {
+                    setActiveBar(link.name.toLowerCase());
+                    setToggleMenu(false);
+                  }}
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
