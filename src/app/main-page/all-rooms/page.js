@@ -1,52 +1,18 @@
-"use client";
+import Link from "next/link"
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-
-export default function AllRooms() {
-  const [rooms, setRooms] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
-
-  useEffect(() => {
-    setLoading(true);
-    const fetchRoom = async () => {
-      try {
-        const res = await fetch("/api/rooms");
-        const data = await res.json();
-        setRooms(data);
-        localStorage.setItem("rooms", JSON.stringify(data));
-      } catch (err) {
-        console.error("Failed to fetch rooms", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchRoom();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="bg-[#fefae0] text-[#6b0f1a] min-h-screen px-4 py-5">
-        <div className="animate-pulse space-y-3">
-          <div className="text-center mb-6">
-            <div className="h-8 w-32 mx-auto bg-gray-300 rounded"></div>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-10">
-            {[...Array(8)].map((_, idx) => (
-              <div key={idx} className="space-y-3">
-                <div className="bg-gray-300 h-52 w-full rounded-md"></div>
-                <div className="h-5 bg-gray-300 rounded w-3/4"></div>
-                <div className="h-4 bg-gray-200 rounded w-full"></div>
-                <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-                <div className="h-8 bg-gray-300 rounded w-1/2"></div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
+const AllRooms = async ()=> {
+ 
+  let rooms = []
+ try {
+   const res = await fetch("http://localhost:3000/api/rooms" , {cache:"no-store"})
+    if(!res.ok){
+      console.log("error occur")
+    }else{
+      rooms = await res.json()
+    }
+ } catch (error) {
+   console.log("something went wrong" ,error)
+ }
 
   return (
     <div className="bg-[#fefae0] text-[#6b0f1a] min-h-screen">
@@ -59,9 +25,10 @@ export default function AllRooms() {
           {rooms.map((room) => (
             <div
               key={room._id}
-              onClick={() => router.push(`/main-page/all-rooms/${room._id}`)}
+             
               className="cursor-pointer bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition"
             >
+              <Link href={`/main-page/all-rooms/${room._id}`}>
               <img
                 src={room.image || "/placeholder.jpg"}
                 alt={room.name}
@@ -73,6 +40,7 @@ export default function AllRooms() {
                 <p className="mt-2 text-[#6b0f1a] font-semibold">₹{room.price} / night</p>
                 <p className="text-xs text-gray-500">{room.totalRooms} Rooms Available</p>
               </div>
+              </Link>
             </div>
           ))}
         </div>
@@ -80,3 +48,6 @@ export default function AllRooms() {
     </div>
   );
 }
+
+
+export default AllRooms

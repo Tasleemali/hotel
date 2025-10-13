@@ -138,7 +138,7 @@ const BookRoomPage = () => {
     setLoading(false);
   };
 
-  if (!room) return <div className="text-center mt-10">Loading room details...</div>;
+  if (!room) return <div className=" min-h-screen grid place-items-center "></div>;
 
   return (
     <div className="max-w-5xl mx-auto p-6 bg-white text-black min-h-screen md:py-10   ">
