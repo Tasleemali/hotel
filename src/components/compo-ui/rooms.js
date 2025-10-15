@@ -32,7 +32,7 @@ const Rooms = async () => {
       <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-10">
   {rooms.slice(0, 4).map((room, i) => {
     <AllRoomUi
-      key={i}
+      key={room._id}
       name={room.name}
       image={room.image}
       totalRooms={room.totalRooms}
