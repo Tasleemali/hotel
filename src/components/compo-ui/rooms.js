@@ -30,7 +30,7 @@ const Rooms = async () => {
         <h1 className="text-2xl md:text-3xl font-semibold text-center mb-5">Our Rooms</h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-10">
-  {rooms.slice(0, 4).map((room, i) => (
+  {rooms.slice(0, 4).map((room, i) => {
     <AllRoomUi
       key={i}
       name={room.name}
@@ -40,7 +40,7 @@ const Rooms = async () => {
       price={room.price}
       to={`/main-page/all-rooms/${room._id}`}
     />
-  ))}
+})}
 </div>
 
         <div className="text-center mt-10">
