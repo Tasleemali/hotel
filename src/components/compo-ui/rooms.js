@@ -31,6 +31,7 @@ const Rooms = async () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-10">
   {rooms.slice(0, 4).map((room, i) => {
+   return (
     <AllRoomUi
       key={room._id}
       name={room.name}
@@ -38,7 +39,9 @@ const Rooms = async () => {
       totalRooms={room.totalRooms}
       description={room.description}
       price={room.price}
-      to={`/main-page/all-rooms/${room._id}`} />
+      to={`/main-page/all-rooms/${room._id}`}
+    />
+  );
 })}
 </div>
 
