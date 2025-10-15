@@ -4,7 +4,7 @@ const Rooms = async () => {
   let rooms = [];
 
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/rooms, { cache: 'no-store' });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/rooms`, { cache: 'no-store' });
     if (res.ok) {
       rooms = await res.json();
     } else {
