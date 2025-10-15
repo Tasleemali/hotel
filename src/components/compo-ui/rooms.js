@@ -29,19 +29,19 @@ const Rooms = async () => {
       <div className="max-w-screen-2xl mx-auto px-2 md:px-4 py-5">
         <h1 className="text-2xl md:text-3xl font-semibold text-center mb-5">Our Rooms</h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-10">
-          {rooms.slice(0, 4).map((room ,i) => (
-             <AllRoomUi key={i} name={room.name}
-             image={room.image}
-             totalRooms={room.totalRooms} 
-             description={room.description} 
-             price={room.price}
-               to={`/main-page/all-rooms/${room._id}`}
-             /> 
-            
-        
-          ))}
-        </div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-10">
+  {rooms.slice(0, 4).map((room, i) => (
+    <AllRoomUi
+      key={i}
+      name={room.name}
+      image={room.image}
+      totalRooms={room.totalRooms}
+      description={room.description}
+      price={room.price}
+      to={`/main-page/all-rooms/${room._id}`}
+    />
+  ))}
+</div>
 
         <div className="text-center mt-10">
           <Link
