@@ -1,5 +1,5 @@
 import Link from 'next/link';
-
+ import AllRoomUi from './allroom-ui';
 const Rooms = async () => {
   let rooms = [];
 
@@ -30,23 +30,12 @@ const Rooms = async () => {
         <h1 className="text-2xl md:text-3xl font-semibold text-center mb-5">Our Rooms</h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-10">
-          {rooms.slice(0, 4).map((rom) => (
-            <Link
-              key={rom._id}
-              href={`/main-page/all-rooms/${rom._id}`}
-              className="cursor-pointer bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-200"
-            >
-              <img
-                src={rom.image}
-                alt={rom.name}
-                className="w-full h-52 object-cover"
-              />
-              <div className="p-4">
-                <h2 className="text-lg font-bold">{rom.name}</h2>
-                <p className="text-sm text-gray-600 line-clamp-3 mt-1">{rom.description}</p>
-                <p className="text-[#6b0f1a] font-semibold mt-2">₹{rom.price}</p>
-              </div>
-            </Link>
+          {rooms.slice(0, 4).map((room ,i) => (
+             <AllRoomUi key={i} name={room.name} image={room.image} totalRooms={room.totalRooms}  description={room.description} price={room.price}
+               to={`/main-page/all-rooms/${room._id}`}
+             /> 
+            
+        
           ))}
         </div>
 

@@ -1,4 +1,6 @@
-import Link from "next/link"
+
+import AllRoomUi from "@/components/compo-ui/allroom-ui"
+
 
 const AllRooms = async ()=> {
  
@@ -22,28 +24,13 @@ const AllRooms = async ()=> {
         </h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {rooms.map((room) => (
-            <div
-              key={room._id}
-             
-              className="cursor-pointer bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition"
-            >
-              <Link href={`/main-page/all-rooms/${room._id}`}>
-              <img
-                src={room.image || "/placeholder.jpg"}
-                alt={room.name}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4">
-                <h2 className="text-lg font-bold mb-1">{room.name}</h2>
-                <p className="text-sm text-gray-700 line-clamp-2">{room.description}</p>
-                <p className="mt-2 text-[#6b0f1a] font-semibold">₹{room.price} / night</p>
-                <p className="text-xs text-gray-500">{room.totalRooms} Rooms Available</p>
-              </div>
-              </Link>
-            </div>
+          {rooms.map((room ,i) => (
+           <AllRoomUi key={i} name={room.name} image={room.image} totalRooms={room.totalRooms}  description={room.description} price={room.price} 
+             to={`/main-page/all-rooms/${room._id}`}
+             />
           ))}
         </div>
+      
       </div>
     </div>
   );

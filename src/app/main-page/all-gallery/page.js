@@ -12,34 +12,9 @@ const gallery = [
 ]
 
 const Gallery = () => {
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false),1000)
-    return () => clearTimeout(timer)
-  }, [])
 
-  if (loading) {
-    return (
-      <div className=' w-full bg-[#fefae0] text-[#6b0f1a] py-8 animate-pulse'>
-        <div className=' w-full max-w-screen-2xl mx-auto px-4 md:px-6'>
-          <div className='text-center mb-6'>
-            <div className='h-8 w-32 mx-auto bg-gray-300 rounded'></div>
-          </div>
-          <div className=' grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 place-items-center'>
-            {Array(8).fill(null).map((_, idx) => (
-              <div key={idx} className='aspect-[3/4] bg-gray-300 rounded-md h-60'></div>
-            ))}
-          </div>
-
-          <div className="mt-20 space-y-4">
-            <div className="h-6 bg-gray-300 w-1/3 rounded-md mx-auto"></div>
-            <div className="h-40 bg-gray-200 w-full rounded-lg"></div>
-          </div>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <div className='bg-[#fefae0] text-[#6b0f1a]'>

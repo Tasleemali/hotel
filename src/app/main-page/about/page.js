@@ -3,61 +3,6 @@ import React, { useEffect, useState } from 'react'
 import Contact from '@/components/compo-ui/contact'
 
 const About = () => {
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000) // Simulated delay
-    return () => clearTimeout(timer)
-  }, [])
-
-  if (loading) {
-    return (
-      <div className="bg-[#fefae0] text-[#6b0f1a] py-16 animate-pulse">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 space-y-12">
-          {/* Heading */}
-          <div className="text-center space-y-4">
-            <div className="h-10 bg-gray-300 w-1/2 mx-auto rounded-md"></div>
-            <div className="h-5 bg-gray-200 w-1/3 mx-auto rounded-md"></div>
-          </div>
-
-          {/* Image + About Section */}
-          <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-14">
-            <div className="h-80 md:h-[500px] bg-gray-300 w-full rounded-2xl"></div>
-            <div className="space-y-6">
-              <div className="h-7 bg-gray-300 w-1/3 rounded-md"></div>
-              <div className="space-y-2">
-                <div className="h-4 bg-gray-200 w-full rounded-md"></div>
-                <div className="h-4 bg-gray-200 w-3/4 rounded-md"></div>
-              </div>
-              <div className="h-6 bg-gray-300 w-1/4 rounded-md mt-4"></div>
-              <div className="space-y-2">
-                <div className="h-4 bg-gray-200 w-full rounded-md"></div>
-                <div className="h-4 bg-gray-200 w-2/3 rounded-md"></div>
-              </div>
-            </div>
-          </div>
-
-          {/* Other Sections */}
-          {[...Array(5)].map((_, i) => (
-            <div key={i} className="space-y-4">
-              <div className="h-6 bg-gray-300 w-1/3 rounded-md"></div>
-              <div className="space-y-2">
-                <div className="h-4 bg-gray-200 w-full rounded-md"></div>
-                <div className="h-4 bg-gray-200 w-5/6 rounded-md"></div>
-                <div className="h-4 bg-gray-200 w-3/4 rounded-md"></div>
-              </div>
-            </div>
-          ))}
-
-          {/* Contact Section Placeholder */}
-          <div className="mt-24 space-y-4">
-            <div className="h-6 bg-gray-300 w-1/3 rounded-md mx-auto"></div>
-            <div className="h-40 bg-gray-200 w-full rounded-lg"></div>
-          </div>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <div className="bg-[#fefae0] text-[#6b0f1a] py-16">
