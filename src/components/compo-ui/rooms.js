@@ -14,15 +14,8 @@ const Rooms = async () => {
   }
 
   const roomItems = rooms.slice(0, 4).map(room => (
-    <AllRoomUi
-      key={room._id}
-      name={room.name}
-      image={room.image}
-      totalRooms={room.totalRooms}
-      description={room.description}
-      price={room.price}
-      to={`/main-page/all-rooms/${room._id}`}
-    />
+    <Link href={`/main-page/all-rooms/${room._id}`}> <AllRoomUi key={i} name={room.name} image={room.image} totalRooms={room.totalRooms} description={room.description} price={room.price} /> </Link>
+
   ));
 
   return (
