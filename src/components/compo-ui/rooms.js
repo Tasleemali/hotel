@@ -1,5 +1,6 @@
 import Link from 'next/link';
- import AllRoomUi from './allroom-ui';
+import AllRoomUi from './allroom-ui';
+
 const Rooms = async () => {
   let rooms = [];
 
@@ -7,31 +8,12 @@ const Rooms = async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/rooms`, { cache: 'no-store' });
     if (res.ok) {
       rooms = await res.json();
-    } else {
-      console.error('Failed to fetch rooms:', res.status, res.statusText);
     }
   } catch (error) {
     console.error('Error fetching rooms:', error);
   }
 
-  // If API returns nothing, you can render a placeholder
-  if (!rooms.length) {
-    return (
-      <div className="bg-white text-[#6b0f1a] min-h-screen py-5">
-        <h1 className="text-2xl md:text-3xl font-semibold text-center mb-5">Our Rooms</h1>
-        <p className="text-center text-gray-500">No rooms available at the moment.</p>
-      </div>
-    );
-  }
-
-  return (
-    <div className="bg-white text-[#6b0f1a]">
-      <div className="max-w-screen-2xl mx-auto px-2 md:px-4 py-5">
-        <h1 className="text-2xl md:text-3xl font-semibold text-center mb-5">Our Rooms</h1>
-
-      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-10">
-  {rooms.slice(0, 4).map((room, i) => {
-   return (
+  const roomItems = rooms.slice(0, 4).map(room => (
     <AllRoomUi
       key={room._id}
       name={room.name}
@@ -41,9 +23,16 @@ const Rooms = async () => {
       price={room.price}
       to={`/main-page/all-rooms/${room._id}`}
     />
-  );
-})}
-</div>
+  ));
+
+  return (
+    <div className="bg-white text-[#6b0f1a]">
+      <div className="max-w-screen-2xl mx-auto px-2 md:px-4 py-5">
+        <h1 className="text-2xl md:text-3xl font-semibold text-center mb-5">Our Rooms</h1>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-10">
+          {roomItems}
+        </div>
 
         <div className="text-center mt-10">
           <Link
@@ -59,3 +48,4 @@ const Rooms = async () => {
 };
 
 export default Rooms;
+
