@@ -38,8 +38,7 @@ const Rooms = async () => {
       totalRooms={room.totalRooms}
       description={room.description}
       price={room.price}
-      to={`/main-page/all-rooms/${room._id}`}
-    />
+      to={`/main-page/all-rooms/${room._id}`} />
 })}
 </div>
 
